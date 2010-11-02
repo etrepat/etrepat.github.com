@@ -23,40 +23,17 @@
     }
   });
 
-  var NavEffects = Class.create({
-    initialize: function() {
-      this.options = {
-        selector: '#header nav ul li a',
-        onMouseEnter: null,
-        onMouseLeave: null
-      };
-      Object.extend(this.options || arguments[0]);
-      
-      if ( !this.options.onMouseEnter )
-        this.options.onMouseEnter = this.onMouseEnter;
-        
-      if ( !this.options.onMouseLeave )
-        this.options.onMouseLeave = this.onMouseLeave;
-        
-      $$(this.options.selector).each(function(element) {
-        element.observe('mouseenter', this.options.onMouseEnter.bind(this));
-        element.observe('mouseleave', this.options.onMouseLeave.bind(this));
-      }.bind(this));
-    },
-    
-    onMouseEnter: function(e) {
-      var element = e.findElement();
-      element.morph('background-color: #fff; color: #0af', .2);
-    },
-    
-    onMouseLeave: function(e) {
-      var element = e.findElement();
-      element.morph('background-color: #0af; color: #fff', .2);
-    }
-  });
-
   document.observe('dom:loaded', function(e) {
-    new NavEffects();
+    $$('#header nav ul li a').each(function(anchor) {
+      anchor.observe('mouseenter', function(e) {
+        e.findElement().morph('background-color: #fff; color: #0af', .2);
+      });
+      
+      anchor.observe('mouseleave', function(e) {
+        e.findElement().morph('background-color: #0af; color: #fff', .2);
+      });
+    });
+
     new BackgroundLoader();
   });
 })();
