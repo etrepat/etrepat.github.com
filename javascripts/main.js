@@ -44,6 +44,20 @@ Site.BackgroundLoader = Class.create({
   }
 });
 
+Object.extend(Site.BackgroundLoader, {
+  load: function(onElement, fromUrl) {
+    return new Site.BackgroundLoader({
+      element: onElement,
+      url: fromUrl
+    });
+  },
+  
+  fromJSONP: function(jsonp) {
+    if ( typeof jsonp['url'] !== 'undefined' )
+      return Site.BackgroundLoader.load('background', jsonp['url']);
+  }
+});
+
 Site.LazyScriptLoader = Class.create({
   load: function(url, options) {
     var opts = {
@@ -77,11 +91,8 @@ Site.LazyScriptLoader = Class.create({
       position: 'first'
     });
     
-    // load background image
-    new Site.BackgroundLoader({
-      element: 'background',
-      url:'http://www.nasa.gov/images/content/494060main_rolloutmoon-lg_full_full.jpg'
-    });
+    // load NASA image of the day
+    loader.load('http://nimod-jsonp.heroku.com/?callback=Site.BackgroundLoader.fromJSONP');
     
     // add nice hover effect to nav links
     $$('#header nav ul li a').each(function(anchor) {
