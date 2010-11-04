@@ -44,6 +44,8 @@ Site.BackgroundLoader = Class.create({
   }
 });
 
+Site.BackgroundInfo = null;
+
 Object.extend(Site.BackgroundLoader, {
   load: function(onElement, fromUrl) {
     return new Site.BackgroundLoader({
@@ -53,8 +55,13 @@ Object.extend(Site.BackgroundLoader, {
   },
   
   fromJSONP: function(jsonp) {
-    if ( typeof jsonp['url'] !== 'undefined' )
-      return Site.BackgroundLoader.load('background', jsonp['url']);
+    if ( typeof jsonp['error'] === 'undefined' ) {
+      if ( typeof jsonp['src'] !== 'undefined' ) {
+        Site.BackgroundInfo = jsonp;
+        console.debug(Site.BackgroundInfo);
+        return Site.BackgroundLoader.load('background', jsonp['src']);
+      }
+    }
   }
 });
 
@@ -92,7 +99,7 @@ Site.LazyScriptLoader = Class.create({
     });
     
     // load NASA image of the day
-    loader.load('http://nimod-jsonp.heroku.com/?callback=Site.BackgroundLoader.fromJSONP');
+    loader.load('http://nimod-jsonp.etrepat.com/?callback=Site.BackgroundLoader.fromJSONP');
     
     // add nice hover effect to nav links
     $$('#header nav ul li a').each(function(anchor) {
