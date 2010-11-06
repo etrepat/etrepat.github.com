@@ -1,7 +1,14 @@
+// Webfonts
 WebFontConfig = {
   google: { families: [ 'Yanone Kaffeesatz' ] }
 };
 
+// Google Analytics
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-19543735-1']);
+_gaq.push(['_trackPageview']);
+
+// Our very own namespace
 var Site = { };
 
 Site.BackgroundLoader = Class.create({
@@ -93,12 +100,13 @@ Site.LazyScriptLoader = Class.create({
 
   document.observe('dom:loaded', function(e) {
     // lazily-load webfonts from google
-    loader.load('http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js', {
-      position: 'first'
-    });
+    loader.load('http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
 
     // load NASA image of the day
     loader.load('http://nimod-jsonp.etrepat.com/?callback=Site.BackgroundLoader.fromJSONP');
+
+    // load google-analytics
+    loader.load('http://www.google-analytics.com/ga.js');
 
     // add nice hover effect to nav links
     $$('#header nav ul li a').each(function(anchor) {
