@@ -117,3 +117,9 @@ html, body {
 }
 
 #nasa p { text-align: right; }
+
+#nasa img {
+  border: 0;
+  vertical-align: bottom;
+}
+
