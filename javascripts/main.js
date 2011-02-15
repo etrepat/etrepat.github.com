@@ -118,9 +118,6 @@ Site.LazyScriptLoader = Class.create({
         e.findElement().morph('background-color: #0af; color: #fff', .2);
       });
     });
-
-    // initialize shadowbox
-    Shadowbox.init({skipSetup: true});
   });
 })();
 
