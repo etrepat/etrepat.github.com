@@ -1,0 +1,18 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+  Jedi Master: Estanislau Trepat
+  Site: http://etrepat.com
+  Twitter: etrepat
+  Location: Rosselló, Lleida, Spain
+
+/* THANKS */
+  Names (& URL): 
+  Mr.doob http://mrdoob.com/
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: jQuery, Three.js
+  Source: https://github.com/etrepat/etrepat.github.com
+  
